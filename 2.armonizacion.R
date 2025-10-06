@@ -6,7 +6,7 @@
 # Se cargan las librerías necesarias para manipulación de datos, fechas y tablas
 pacman::p_load(
   tidyverse, lubridate, read.dbc, readxl, purrr, tibble,
-  janitor, flextable, arsenal, webshot2
+  janitor, flextable, arsenal, webshot2, stringi
 )
 
 # --- 2. CARGA DE BASES DE DATOS ----
@@ -94,9 +94,9 @@ municipios_df_1 <- BR_Den_09_13 %>%
       TRUE ~ NA_character_
     ),
     classi_fin = case_when(
-      classi_fin %in% c("1", "2", "3", "4") ~ "Confirmado",
-      classi_fin == "5" ~ "Descartado",
-      classi_fin == "8" ~ "Sospechoso",
+      classi_fin %in% c("1", "2", "3", "4") ~ "confirmado",
+      classi_fin == "5" ~ "descartado",
+      classi_fin == "8" ~ "sospechoso",
       TRUE ~ NA_character_
     ),
     infeccion = case_when(
@@ -121,11 +121,11 @@ municipios_df_2 <- BR_Den_14_23 %>%
       TRUE ~ NA_character_
     ),
     classi_fin = case_when(
-      classi_fin == "10" ~ "Confirmado",
-      classi_fin == "11" ~ "Confirmado",
-      classi_fin == "12" ~ "Confirmado",
-      classi_fin == "5" ~ "Descartado",
-      classi_fin == "8" ~ "Sospechoso",
+      classi_fin == "10" ~ "confirmado",
+      classi_fin == "11" ~ "confirmado",
+      classi_fin == "12" ~ "confirmado",
+      classi_fin == "5" ~ "descartado",
+      classi_fin == "8" ~ "sospechoso",
       TRUE ~ NA_character_
     ),
     infeccion = case_when(
@@ -224,32 +224,32 @@ br_den_09_13 <- br_den_09_13 %>%
     
     # Clasificación final
     classi_fin = case_when(
-      classi_fin %in% c("1", "2", "3", "4") ~ "Confirmado",
-      classi_fin == "5" ~ "Descartado",
-      classi_fin == "8" ~ "Sospechoso"
+      classi_fin %in% c("1", "2", "3", "4") ~ "confirmado",
+      classi_fin == "5" ~ "descartado",
+      classi_fin == "8" ~ "sospechoso"
     ),
     
     # Tipo de test aplicado
     test = case_when(
-      resul_ns1 %in% c("1", "2") ~ "NS1",
-      resul_soro %in% c(1, 2) ~ "IgM",
-      resul_pcr %in% c(1, 2) ~ "PCR"
+      resul_ns1 %in% c("1", "2") ~ "ns1",
+      resul_soro %in% c(1, 2) ~ "igm",
+      resul_pcr %in% c(1, 2) ~ "pcr"
     ),
     
     # Resultado del test
     resultado = case_when(
-      resul_ns1 == "1" ~ "Positivo",
-      resul_ns1 == "2" ~ "Negativo",
-      resul_soro == 1 ~ "Positivo",
-      resul_soro == 2 ~ "Negativo",
-      resul_pcr == 1 ~ "Positivo",
-      resul_pcr == 2 ~ "Negativo"
+      resul_ns1 == "1" ~ "positivo",
+      resul_ns1 == "2" ~ "negativo",
+      resul_soro == 1 ~ "positivo",
+      resul_soro == 2 ~ "negativo",
+      resul_pcr == 1 ~ "positivo",
+      resul_pcr == 2 ~ "negativo"
     ),
     
     # Sexo del caso
     sexo = case_when(
-      cs_sexo == "F" ~ "Femenino",
-      cs_sexo == "M" ~ "Masculino"
+      cs_sexo == "F" ~ "femenino",
+      cs_sexo == "M" ~ "masculino"
     ),
     
     # Serotipo identificado
@@ -261,8 +261,8 @@ br_den_09_13 <- br_den_09_13 %>%
     
     # Criterio de confirmación
     criterio = case_when(
-      criterio == "1" ~ "Laboratorio",
-      criterio == "2" ~ "Nexo",
+      criterio == "1" ~ "laboratorio",
+      criterio == "2" ~ "nexo",
       criterio == "3" ~ NA_character_
     ),
     
@@ -289,29 +289,29 @@ br_den_14_23 <- br_den_14_23 %>%
     ),
     
     classi_fin = case_when(
-      classi_fin %in% c("10", "11", "12") ~ "Confirmado",
-      classi_fin == "5" ~ "Descartado",
-      classi_fin == "8" ~ "Sospechoso"
+      classi_fin %in% c("10", "11", "12") ~ "confirmado",
+      classi_fin == "5" ~ "descartado",
+      classi_fin == "8" ~ "sospechoso"
     ),
     
     test = case_when(
-      resul_ns1 %in% c(1, 2) ~ "NS1",
-      resul_soro %in% c(1, 2) ~ "IgM",
-      resul_pcr %in% c(1, 2) ~ "PCR"
+      resul_ns1 %in% c(1, 2) ~ "ns1",
+      resul_soro %in% c(1, 2) ~ "igm",
+      resul_pcr %in% c(1, 2) ~ "pcr"
     ),
     
     resultado = case_when(
-      resul_ns1 == 1 ~ "Positivo",
-      resul_ns1 == 2 ~ "Negativo",
-      resul_soro == 1 ~ "Positivo",
-      resul_soro == 2 ~ "Negativo",
-      resul_pcr == 1 ~ "Positivo",
-      resul_pcr == 2 ~ "Negativo"
+      resul_ns1 == 1 ~ "positivo",
+      resul_ns1 == 2 ~ "negativo",
+      resul_soro == 1 ~ "positivo",
+      resul_soro == 2 ~ "negativo",
+      resul_pcr == 1 ~ "positivo",
+      resul_pcr == 2 ~ "negativo"
     ),
     
     sexo = case_when(
-      cs_sexo == "F" ~ "Femenino",
-      cs_sexo == "M" ~ "Masculino"
+      cs_sexo == "F" ~ "femenino",
+      cs_sexo == "M" ~ "masculino"
     ),
     
     serotipo = case_when(
@@ -321,8 +321,8 @@ br_den_14_23 <- br_den_14_23 %>%
     ),
     
     criterio = case_when(
-      criterio == "1" ~ "Laboratorio",
-      criterio == "2" ~ "Nexo",
+      criterio == "1" ~ "laboratorio",
+      criterio == "2" ~ "nexo",
       criterio == "3" ~ NA_character_
     ),
     
@@ -344,7 +344,7 @@ br_den_09_13_total <- br_den_09_13 %>%
   ) %>%
   select(
     fecha, fis, fecha_carga, fecha_lab, re, classi_fin, gravedad, sexo,
-    test, resultado, serotipo, criterio, sistema, pais
+    test, resultado, serotipo, criterio, sistema, pais, tipo_base
   )
 
 ## SINAN 3
@@ -357,7 +357,7 @@ br_den_14_23_total <- br_den_14_23 %>%
   ) %>%
   select(
     fecha, fis, fecha_carga, fecha_lab, re, classi_fin, gravedad, sexo,
-    test, resultado, serotipo, criterio, sistema, pais
+    test, resultado, serotipo, criterio, sistema, pais, tipo_base
   )
 
 ## 4.11 Unión final
@@ -375,7 +375,10 @@ den_br_total<- den_br_total %>%
     year = ifelse(is.na(fis),
                   ifelse(is.na(fecha_lab), year(fecha), year(fecha_lab)),
                   year(fis)),
-    year_e = ifelse(se >= 40, as.character(year), as.character(year - 1))
+    year_e = ifelse(se == 1 & mes == 12,
+                    year ,
+                    ifelse(se < 40, year - 1, year)),
+    distrito= "Foz do Iguaçu"
   )
 
 
@@ -447,7 +450,8 @@ ft2 <- flextable(tabla_municipio_ar_df) %>%
   ) %>%
   add_header_lines("Tabla 2. Distribución de casos vinculados a Puerto Iguazú por residencia y sitio probable de infección") %>%
   set_table_properties(width = 0.5, layout = "autofit")%>%
-  footnote(i = 1, j = 1, value = as_paragraph("No se consideran las bases vinculadas al C2 por no tener datos de residencia"))
+  footnote(i = 1, j = 1, value = as_paragraph("No se consideran las bases vinculadas al C2 por no tener datos de residencia"),
+           part ="header")
 
 # 5.7 Visualiza la tabla2
 ft2
@@ -477,7 +481,8 @@ ft3 <- flextable(tabla_municipio_ar_df_2) %>%
   add_header_row(values = c("", "Casos de residentes de Puerto Iguazú según SNVS"), colwidths = c(1, 3)) %>%
   add_header_lines(values = "Tabla 3.Distribución de residentes de Puerto Iguazú por sitio de notificación y sistema de vigilancia") %>%
   set_table_properties(width = 0.5, layout = "autofit")  %>%
-  footnote(i = 1, j = 1, value = as_paragraph("No se consideran las bases vinculadas al C2 por no tener datos de residencia"))
+  footnote(i = 1, j = 1, value = as_paragraph("No se consideran las bases vinculadas al C2 por no tener datos de residencia"),
+           part ="header")
 
 # 5.7 Visualiza la tabla3
 ft3
@@ -505,17 +510,19 @@ AR_SNVS1 <- AR_SNVS1 %>% filter(id_localidad_carga == "3283") %>%
     re = case_when(
       is.na(fis) & difftime(fecha_lab, fn, units = "days") < 365 * 15 ~ "menores",
       is.na(fis) & difftime(fecha_lab, fn, units = "days") < 365 * 65 ~ "adultos",
-      is.na(fis) ~ "ancianos",
+      is.na(fis) & difftime(fecha_lab, fn, units = "days") >= 365 * 65 ~ "ancianos",
+      is.na(fn) ~ NA_character_,
       !is.na(fis) & difftime(fis, fn, units = "days") < 365 * 15 ~ "menores",
       !is.na(fis) & difftime(fis, fn, units = "days") < 365 * 65 ~ "adultos",
-      TRUE ~ "ancianos"
+      !is.na(fis) & difftime(fis, fn, units = "days") >= 365 * 65 ~ "ancianos",
+      TRUE ~ NA_character_
     ),
     
     # Clasificación por tipo y tiempo de laboratorio
     dato_labo = case_when(
-      difftime(fecha_lab, fis, units = "days") >= 7 & test == "IgM" & resultado == "negativo" ~ "descartado",
-      difftime(fecha_lab, fis, units = "days") > 5 & test == "IgM" & resultado == "positivo" ~ "confirmado",
-      difftime(fecha_lab, fis, units = "days") <= 5 & test %in% c("PCR", "NS1") & resultado == "positivo" ~ "confirmado",
+      difftime(fecha_lab, fis, units = "days") >= 7 & test == "igm" & resultado == "negativo" ~ "descartado",
+      difftime(fecha_lab, fis, units = "days") > 5 & test == "igm" & resultado == "positivo" ~ "confirmado",
+      difftime(fecha_lab, fis, units = "days") <= 5 & test %in% c("pcr", "ns1") & resultado == "positivo" ~ "confirmado",
       TRUE ~ "sospechoso"
     ),
     
@@ -535,7 +542,11 @@ AR_SNVS1 <- AR_SNVS1 %>% filter(id_localidad_carga == "3283") %>%
       dato_labo == "sospechoso" & classi_fin == "descartado" ~ "c",
       dato_labo == "descartado" & classi_fin %in% c("confirmado", "sospechoso") ~ "b",
       TRUE ~ NA_character_
+    ),sexo = case_when(
+      sexo == "Femenino" ~ "femenino",
+      sexo == "Masculino" ~ "masculino"
     )
+    
   )
 
 # Limpieza de fechas incoherentes
@@ -551,67 +562,72 @@ AR_SNVS2 <- AR_SNVS2 %>%
     test = case_when(
       determinacion == "Antígeno NS1" ~ "ns1",
       determinacion == "Genoma viral" ~ "pcr",
-      determinacion == "IgM DENV" ~ "igm"
+      determinacion == "IgM DENV"     ~ "igm",
+      TRUE ~ NA_character_
     ),
-    prueba = case_when(
-      tecnica %in% c("ELISA NS1", "RT-qPCR", "MAC-ELISA IgM", "ELISA IgM comercial") ~ test
-    ),
+    
     serotipo = case_when(
       resultado == "DEN-1" ~ "DEN1",
       resultado == "DEN-2" ~ "DEN2",
-      resultado == "DEN-4" ~ "DEN4"
+      resultado == "DEN-4" ~ "DEN4",
+      TRUE ~ NA_character_
     ),
+    
     resultado = case_when(
-      resultado %in% c("DEN-1", "DEN-2", "DEN-4", "Positivo") ~ "positivo",
-      resultado %in% c("Negativo", "No detectable") ~ "negativo"
+      resultado %in% c("DEN-1", "DEN-2", "DEN-4", "positivo", "Caso de Dengue en brote con laboratorio (+)") ~ "positivo",
+      resultado %in% c("negativo", "No detectable") ~ "negativo",
+      TRUE ~ NA_character_
     ),
-    fecha = as.Date(fecha_apertura, format = "%d/%m/%Y"),
-    fis = as.Date(fis, format = "%d/%m/%Y"),
+    
+    fecha     = as.Date(fecha_apertura, format = "%d/%m/%Y"),
+    fis       = as.Date(fis, format = "%d/%m/%Y"),
     fecha_lab = as.Date(ftm, format = "%d/%m/%Y")
   ) %>%
   mutate(
+    # Clasificación epidemiológica final
     classi_fin = case_when(
-      clasificacion_manual %in% c("caso confirmado den-1", "caso confirmado den-2", "caso confirmado den-4",
-                                  "caso confirmado por nexo epidemiológico autóctono", "caso confirmado por nexo epidemiológico importado",
-                                  "caso confirmado sin serotipo", "caso probable") ~ "confirmado",
-      clasificacion_manual %in% c("caso descartado", "caso descartado por epidemiología") ~ "descartado",
-      clasificacion_manual %in% c("caso sospechoso", "caso sospechoso no conclusivo") ~ "sospechoso"
+      clasificacion_manual %in% c("Caso confirmado DEN-1", "Caso confirmado DEN-2", "Caso confirmado DEN-4",
+                                  "Caso confirmado sin serotipo", "Caso confirmado", 
+                                  "Caso probable", "Caso de Dengue en brote con laboratorio (+)") ~ "confirmado",
+      clasificacion_manual %in% c("Caso confirmado por nexo epidemiológico autóctono",
+                                  "Caso confirmado por nexo epidemiológico importado") ~ "confirmado",
+      clasificacion_manual %in% c("Caso descartado", "Caso descartado por epidemiología") ~ "descartado",
+      clasificacion_manual %in% c("Caso sospechoso", "Caso sospechoso no conclusivo") ~ "sospechoso",
+      TRUE ~ NA_character_
     ),
+    
+    # Clasificación por criterio
     criterio = case_when(
-      clasificacion_manual %in% c("caso confirmado den-1", "caso confirmado den-2", "caso confirmado den-4",
-                                  "caso confirmado sin serotipo", "caso probable", "caso sospechoso no conclusivo") ~ "laboratorio",
-      clasificacion_manual %in% c("caso confirmado por nexo epidemiológico autóctono", "caso confirmado por nexo epidemiológico importado",
-                                  "caso descartado por epidemiología", "caso sospechoso") ~ "nexo",
-      clasificacion_manual == "caso descartado" ~ "laboratorio"
+      clasificacion_manual %in% c("Caso confirmado DEN-1", "Caso confirmado DEN-2", "Caso confirmado DEN-4",
+                                  "Caso confirmado sin serotipo", "Caso confirmado",
+                                  "Caso probable", "Caso sospechoso no conclusivo",
+                                  "Caso de Dengue en brote con laboratorio (+)") ~ "laboratorio",
+      clasificacion_manual %in% c("Caso confirmado por nexo epidemiológico autóctono", 
+                                  "Caso confirmado por nexo epidemiológico importado",
+                                  "Caso descartado por epidemiología", "Caso sospechoso") ~ "nexo",
+      clasificacion_manual == "Caso descartado" ~ "laboratorio",
+      TRUE ~ NA_character_
     ),
-    temporalidad = as.numeric(difftime(fecha, fis, units = "days")),
+    
+    # Clasificación por serotipo
+    serotipo = case_when(
+      resultado == "DEN-1" ~ "DEN1",
+      resultado == "DEN-2" ~ "DEN2",
+      resultado == "DEN-4" ~ "DEN4",
+      TRUE ~ NA_character_
+    ),
+    
     re = case_when(
-      edad_diagnostico < 15 ~ "menores",
-      edad_diagnostico < 65 ~ "adultos",
-      TRUE ~ "ancianos"
+      edad_diagnostico < 15  ~ "menores",
+      edad_diagnostico < 65  ~ "adultos",
+      edad_diagnostico >= 65 ~ "ancianos",
+      TRUE ~ NA_character_
     ),
+    
     sexo = case_when(
       sexo == "F" ~ "femenino",
-      sexo == "M" ~ "masculino"
-    ),
-    dato_labo = case_when(
-      difftime(fecha_lab, fis, units = "days") >= 7 & test == "igm" & resultado == "negativo" ~ "descartado",
-      difftime(fecha_lab, fis, units = "days") > 5 & test == "igm" & resultado == "positivo" ~ "confirmado",
-      difftime(fecha_lab, fis, units = "days") <= 5 & test %in% c("pcr", "ns1") & resultado == "positivo" ~ "confirmado",
-      TRUE ~ "sospechoso"
-    ),
-    classi_validada = case_when(
-      dato_labo == "confirmado" & classi_fin == "confirmado" ~ "a",
-      dato_labo == "descartado" & classi_fin == "descartado" ~ "d",
-      dato_labo == "confirmado" & classi_fin == "descartado" ~ "c",
-      dato_labo == "descartado" & classi_fin == "confirmado" ~ "b"
-    ),
-    classi_validada_sosp = case_when(
-      dato_labo == "confirmado" & classi_fin %in% c("confirmado", "sospechoso") ~ "a",
-      dato_labo == "descartado" & classi_fin == "descartado" ~ "d",
-      dato_labo == "confirmado" & classi_fin == "descartado" ~ "c",
-      dato_labo == "sospechoso" & classi_fin == "descartado" ~ "c",
-      dato_labo == "descartado" & classi_fin %in% c("confirmado", "sospechoso") ~ "b"
+      sexo == "M" ~ "masculino",
+      TRUE ~ NA_character_
     )
   )
 
@@ -649,16 +665,37 @@ AR_SNVS1 <- AR_SNVS1 %>%
     se = ifelse(is.na(fis), ifelse(is.na(fecha_lab), epiweek(fecha), epiweek(fecha_lab)), epiweek(fis)),
     mes = ifelse(is.na(fis), ifelse(is.na(fecha_lab), month(fecha), month(fecha_lab)), month(fis)),
     year = ifelse(is.na(fis), ifelse(is.na(fecha_lab), year(fecha), year(fecha_lab)), year(fis)),
-    year_e = ifelse(se >= 40, as.character(year), as.character(year - 1))
+    year_e = ifelse(se == 1 & mes == 12,
+                        year ,
+                        ifelse(se < 40, year - 1, year)),
+    serotipo = NA_character_,
+    sistema = "SNVS_1.0",
+    pais = "argentina",
+    distrito = "Puerto Iguazú"
+  ) %>%
+  select(
+    fecha, fis, fecha_lab, re, classi_fin, sexo,
+    test, resultado, serotipo, criterio,
+    se, mes, year, year_e, sistema, pais, distrito, tipo_base
   )
+
 
 AR_SNVS2 <- AR_SNVS2 %>%
   mutate(
     se = ifelse(is.na(fis), ifelse(is.na(fecha_lab), epiweek(fecha), epiweek(fecha_lab)), epiweek(fis)),
     mes = ifelse(is.na(fis), ifelse(is.na(fecha_lab), month(fecha), month(fecha_lab)), month(fis)),
     year = ifelse(is.na(fis), ifelse(is.na(fecha_lab), year(fecha), year(fecha_lab)), year(fis)),
-    year_e = ifelse(se >= 40, as.character(year), as.character(year - 1))
+        year_e = ifelse(se == 1 & mes == 12,                     year ,                     ifelse(se < 40, year - 1, year)),
+    sistema = "SNVS_2.0",
+    pais = "argentina",
+    distrito = "Puerto Iguazú"
+  ) %>%
+  select(
+    fecha, fis, fecha_lab, re, classi_fin, sexo,
+    test, resultado, serotipo, criterio,
+    se, mes, year, year_e, sistema, pais, distrito, tipo_base
   )
+
 
 # C2
 AR_C2 <- AR_C2 %>%
@@ -672,51 +709,66 @@ AR_C2 <- AR_C2 %>%
     fecha = as.Date(fecha_consulta),
     fis = as.Date(fecha_inicio_sintomas),
     sexo = str_to_title(sexo),
-    classi_fin = criterio_epi,
+    classi_fin = tolower(criterio_epi),
     criterio = "nexo",
     edad = as.numeric(edad),
     re = case_when(
       edad < 15 ~ "menores",
       edad < 65 ~ "adultos",
-      TRUE ~ "ancianos"
+      edad >= 65 ~ "ancianos",
+      TRUE ~ NA_character_
     ),
     se = ifelse(!is.na(fis), epiweek(fis), epiweek(fecha)),
     mes = ifelse(!is.na(fis), month(fis), month(fecha)),
     year = ifelse(!is.na(fis), year(fis), year(fecha)),
-    year_e = ifelse(se >= 40, as.character(year), as.character(year - 1))
+    year_e = ifelse(se == 1 & mes == 12,
+                    year ,
+                    ifelse(se < 40, year - 1, year)),
+    sexo = case_when(
+      sexo == "F" ~ "femenino",
+      sexo == "M" ~ "masculino",
+      TRUE ~ NA_character_
+    )
   ) %>%
   select(
     fecha, fis, fecha_lab, re, classi_fin, sexo,
     test, resultado, serotipo, criterio,
-    se, mes, year, year_e, sistema, pais, distrito
+    se, mes, year, year_e, sistema, pais, distrito,tipo_base
   )
 
 #Agrupados
-den_ar_agrupados <- AR_Agrupados %>% mutate(se= semana, 
-                                        year=anio,
-                                        year_e = ifelse(se >= 40, as.character(year), as.character(year - 1)),
-                                        mes = case_when(se %in% c(1:4) ~ 1,
-                                                        se %in% c(5:8) ~ 2,
-                                                        se %in% c(9:13) ~ 3,
-                                                        se %in% c(14:17) ~ 4,
-                                                        se %in% c(18:21) ~ 5,
-                                                        se %in% c(22:26) ~ 6,
-                                                        se %in% c(27:30) ~ 7,
-                                                        se %in% c(31:35) ~ 8,
-                                                        se %in% c(36:39) ~ 9,
-                                                        se %in% c(40:43) ~ 10,
-                                                        se %in% c(44:48) ~ 11,
-                                                        se %in% c(49:52) ~ 12),
-                                        menores = sum(`menorque1`+ iguala1 + de2a4+ de5a9+ `de10a14`),
-                                        adultos = sum(`de15a24`+ de35a44+ `de45a64`),
-                                        ancianos = sum(`mayora65`),
-                                        total = sum(menores+adultos+ancianos+ sin_especificacion),
-                                        criterio = "nexo",
-                                        sistema = "SNVS_1.0",
-                                        pais = "argentina",
-                                        distrito = "Puerto Iguazú",
-                                        classi_fin= "confirmado") %>% 
-                                select(se, year, year_e, mes, menores, adultos, ancianos, total, criterio, sistema, pais, distrito, classi_fin)
+den_ar_agrupados <- AR_Agrupados %>% 
+  mutate(
+    se = semana, 
+    year = anio,
+    year_e = ifelse(se >= 40, year, year - 1),
+    mes = case_when(
+      se %in% 1:4   ~ 1,
+      se %in% 5:8   ~ 2,
+      se %in% 9:13  ~ 3,
+      se %in% 14:17 ~ 4,
+      se %in% 18:21 ~ 5,
+      se %in% 22:26 ~ 6,
+      se %in% 27:30 ~ 7,
+      se %in% 31:35 ~ 8,
+      se %in% 36:39 ~ 9,
+      se %in% 40:43 ~ 10,
+      se %in% 44:48 ~ 11,
+      se %in% 49:52 ~ 12
+    ),
+    criterio = "nexo",
+    sistema = "SNVS_1.0",
+    pais = "argentina",
+    distrito = "Puerto Iguazú",
+    classi_fin = "confirmado"
+  ) %>%
+  group_by(year, se, year_e, mes, criterio, sistema, pais, distrito, classi_fin, tipo_base) %>%
+  summarise(
+    menores = sum(`menorque1` + iguala1 + de2a4 + de5a9 + `de10a14`, na.rm = TRUE),
+    adultos = sum(`de15a24` + de35a44 + `de45a64`, na.rm = TRUE),
+    ancianos = sum(`mayora65`, na.rm = TRUE),
+    sin_especificacion = sum(sin_especificacion)) %>%
+  mutate(pais = "argentina", tipo_base = "ar_c2_agrupado")
 
 # Integración final de bases
 den_ar_total <- bind_rows(AR_SNVS1, AR_SNVS2, AR_C2)
@@ -766,21 +818,59 @@ lista_ordenada <- den_py_nuevo %>%
 # 6.3. Cargamos la base de hospitales y la preparamos
 hospitales <- read.csv2(
   "C:/Users/pc/Google Drive/INMET/Vigifronteiras/DATOS/Paraguay/Salud/Hospitales_py_final_Compaginado_final.csv",
-  fileEncoding = "ISO-8859-1"
+  fileEncoding = "latin1"
 ) %>%
   mutate(establecimiento_sin_espacios = gsub(" ", "", Notificado_Original)) %>%
   select(-1)  # elimina una columna innecesaria si la primera es redundante
 
-# 6.4. Hacemos el join por nombre sin espacios
-hospitales_match <- left_join(lista_ordenada, hospitales, by = "establecimiento_sin_espacios")
+hospitales <- hospitales |>
+  mutate(
+    establecimiento_sin_espacios = case_when(
+      str_detect(establecimiento_sin_espacios, "HOSPITALGENERALPEDIA") ~ "HE HOSPITALGENERALPEDIATRICOACOSTANU",
+      str_detect(establecimiento_sin_espacios, "USPTOPDTEFRANCO") ~ "IPS USPTOPDTEFRANCO",
+      str_detect(establecimiento_sin_espacios, "JOSA") ~ "CS JOSEEULOGIOESTIGARRIBIA(CAMPO9)",
+      str_detect(establecimiento_sin_espacios, "CONCEPCIA") ~ "HR CONCEPCION",
+      str_detect(establecimiento_sin_espacios, "CARMENDELPARANA") ~ "CS CARMENDELPARANA",
+      str_detect(establecimiento_sin_espacios, "QUEMADURAS.*CENQUER") ~ "CENTRONACIONALDEQUEMADURASYCIRUGIASRECONSTRUCTIVAS CENQUER",
+      str_detect(establecimiento_sin_espacios, "SANTAFEDELPARANA") ~ "CS SANTAFEDELPARANA",
+      str_detect(establecimiento_sin_espacios, "CAPITA.*NMIRANDA") ~ "USF CAPITANMIRANDA",
+      str_detect(establecimiento_sin_espacios, "EMBY") ~ "HD NEMBY",
+      str_detect(establecimiento_sin_espacios, "LEONMALLORQU") ~ "CS JUANLEONMALLORQUIN",
+      str_detect(establecimiento_sin_espacios, "PA") & str_detect(establecimiento_sin_espacios, "F") ~ "P´F",
+      str_detect(establecimiento_sin_espacios, "FUNDACIA") ~ "FUNDACIONTESAI",
+      str_detect(establecimiento_sin_espacios, "MINGAGUAZ") ~ "HD MINGAGUAZÚ",
+      TRUE ~ establecimiento_sin_espacios
+    )
+  )
+# Hago función para el match
+normalizar_nombre <- function(x) {
+  x |>
+    stri_trans_general("Latin-ASCII") |>       # Elimina tildes
+    toupper() |>                               # Todo en mayúsculas
+    gsub("-", " ", x = _) |>                   # Reemplaza guiones por espacios
+    gsub("\\.", "", x = _) |>                  # Elimina puntos
+    gsub(",", "", x = _) |>
+    gsub("\\s+", " ", x = _) |>                # Compacta múltiples espacios
+    trimws()                                   # Elimina espacios en extremos
+}
+# Aplico la función a ambas bases
 
+lista_ordenada$establecimiento_norm <- normalizar_nombre(lista_ordenada$establecimiento_sin_espacios)
+hospitales$establecimiento_norm <- normalizar_nombre(hospitales$establecimiento_sin_espacios)
+# 6.4. Hacemos el join por nombre sin espacios
+hospitales_match <- left_join(
+  lista_ordenada,
+  hospitales,
+  by = "establecimiento_norm",
+  relationship = "many-to-many"
+)
 # 6.5. Unimos info de hospitales a la base de dengue
 den_py_nuevo <- left_join(den_py_nuevo, hospitales_match, by = "establecimiento_notificante")
 
 # 6.6. Filtramos casos con información válida para el análisis
 den_py_tabla_espacial <- den_py_nuevo %>%
-  mutate(Notificacion_Alto_Parana = na_if(Notificacion_Alto_Parana, " ")) %>%
-  filter(!is.na(Notificacion_Alto_Parana), clasificacion_para == "DENGUE")
+  mutate(Notificacion_Alto_Parana = na_if(Notificacion_Alto_Parana, "")) %>%
+  filter( clasificacion_para == "DENGUE")
 
 # 6.7 Generamos tabla de validación espacial
 tabla_municipio_Py <- tableby(
@@ -800,7 +890,9 @@ ft_py <- flextable(tabla_municipio_Py_df) %>%
   add_header_row(values = c("", "Notificación en Alto Paraná"), colwidths = c(1, ncol(tabla_municipio_Py_df) - 1)) %>%
   add_header_lines(values = "Tabla 1. Distribución de notificaciones por distrito en Alto Paraná") %>%
   set_table_properties(width = 0.5, layout = "autofit") %>%
-  theme_booktabs()
+  theme_booktabs()%>%
+  footnote(i = 1, j = 1, value = as_paragraph("Los datos no identificados corresponden a siglas o nombres de establecimientos no reconocidos"),,
+           part ="header")
 
 # 6.8 Visualiza la tabla
 ft_py
@@ -821,8 +913,8 @@ den_py_total <- den_py_total %>%
     ),
     edad = na_if(edad, 999),  # 999 como NA
     sexo = case_when(
-      sexo == "FEMENINO" ~ "Femenino",
-      sexo == "MASCULINO" ~ "Masculino",
+      sexo == "FEMENINO" ~ "femenino",
+      sexo == "MASCULINO" ~ "masculino",
       TRUE ~ NA_character_
     )
   )
@@ -854,32 +946,20 @@ den_py_total <- den_py_total %>%
     )
   )
 
-#  Semana epidemiológica, mes, año
-den_py_total <- den_py_total %>%
-  mutate(
-    se = ifelse(is.na(fis),
-                ifelse(is.na(fecha_lab), epiweek(fecha), epiweek(fecha_lab)),
-                epiweek(fis)),
-    mes = ifelse(is.na(fis),
-                 ifelse(is.na(fecha_lab), month(fecha), month(fecha_lab)),
-                 month(fis)),
-    year = as.numeric(ano),
-    year_e = ifelse(se >= 40, as.character(year), as.character(year - 1))
-  )
 
 # Clasificación final y criterio
 den_py_total <- den_py_total %>%
   mutate(
     classi_fin = case_when(
-      classi_fin == "CONFIRMADO" ~ "Confirmado",
-      classi_fin == "DESCARTADO" ~ "Descartado",
-      classi_fin == "PROBABLE" ~ "Confirmado",
-      classi_fin == "SOSPECHOSO" ~ "Sospechoso",
+      classi_fin == "CONFIRMADO" ~ "confirmado",
+      classi_fin == "DESCARTADO" ~ "descartado",
+      classi_fin == "PROBABLE" ~ "confirmado",
+      classi_fin == "SOSPECHOSO" ~ "sospechoso",
       TRUE ~ NA_character_
     ),
     criterio = case_when(
-      criterio == "EPIDEMIOLOGICO" ~ "Nexo",
-      criterio == "LABORATORIO" ~ "Laboratorio",
+      criterio == "EPIDEMIOLOGICO" ~ "nexo",
+      criterio == "LABORATORIO" ~ "laboratorio",
       TRUE ~ NA_character_
     )
   )
@@ -937,7 +1017,7 @@ den_py_nuevo <- den_py_nuevo %>%
       grepl("SD", edad2, ignore.case = TRUE) ~ NA_real_,
       TRUE ~ edad3
     ),
-    criterio = if_else(is.na(test_ns1) & is.na(test_igm) & is.na(test_pcr), "Nexo", "Laboratorio"),
+    criterio = if_else(is.na(test_ns1) & is.na(test_igm) & is.na(test_pcr), "nexo", "laboratorio"),
     year = as.numeric(ano)
   )
 
@@ -945,12 +1025,12 @@ den_py_nuevo <- den_py_nuevo %>%
 den_py_nuevo <- den_py_nuevo %>%
   mutate(
     test_validado = case_when(
-      test_igm == "NEGATIVO" & difftime(fecha_lab, fis, units = "days") >= 7 ~ "IgM",
-      test_pcr == "DENGUE" & difftime(fecha_lab, fis, units = "days") <= 7 ~ "PCR",
-      test_ns1 == "POSITIVO" & difftime(fecha_lab, fis, units = "days") <= 7 ~ "NS1",
-      test_igm == "POSITIVO" & difftime(fecha_lab, fis, units = "days") > 5 ~ "IgM",
-      test_pcr == "NEGATIVO" ~ "PCR",
-      test_ns1 == "NEGATIVO" ~ "NS1",
+      test_igm == "NEGATIVO" & difftime(fecha_lab, fis, units = "days") >= 7 ~ "igm",
+      test_pcr == "DENGUE" & difftime(fecha_lab, fis, units = "days") <= 7 ~ "pcr",
+      test_ns1 == "POSITIVO" & difftime(fecha_lab, fis, units = "days") <= 7 ~ "ns1",
+      test_igm == "POSITIVO" & difftime(fecha_lab, fis, units = "days") > 5 ~ "igm",
+      test_pcr == "NEGATIVO" ~ "pcr",
+      test_ns1 == "NEGATIVO" ~ "ns1",
       TRUE ~ NA_character_
     ),
     noti_distrito = case_when(
@@ -960,10 +1040,11 @@ den_py_nuevo <- den_py_nuevo %>%
       Notificacion_MINGA_GUAZÚ == "si" ~ "MG"
     ),
     classi_fin = case_when(
-      classi_fin == "CONFIRMADO" ~ "Confirmado",
-      classi_fin == "PROBABLE" ~ "Confirmado",
-      classi_fin == "DESCARTADO" ~ "Descartado",
-      classi_fin == "SOSPECHOSO" ~ "Sospechoso"
+      classi_fin == "CONFIRMADO" ~ "confirmado",
+      classi_fin == "DESCARTADO" ~ "descartado",
+      classi_fin == "PROBABLE" ~ "confirmado",
+      classi_fin == "SOSPECHOSO" ~ "sospechoso",
+      TRUE ~ NA_character_
     )
   )
 
@@ -971,18 +1052,18 @@ den_py_nuevo <- den_py_nuevo %>%
 den_py_nuevo <- den_py_nuevo %>%
   mutate(
     resul_validado = case_when(
-      test_igm == "NEGATIVO" & difftime(fecha_lab, fis, units = "days") >= 7 ~ "Negativo",
-      test_pcr == "DENGUE" & difftime(fecha_lab, fis, units = "days") <= 7 ~ "Positivo",
-      test_ns1 == "POSITIVO" & difftime(fecha_lab, fis, units = "days") <= 7 ~ "Positivo",
-      test_igm == "POSITIVO" & difftime(fecha_lab, fis, units = "days") > 5 ~ "Positivo",
-      test_pcr == "NEGATIVO" ~ "Negativo",
-      test_ns1 == "NEGATIVO" ~ "Negativo",
+      test_igm == "NEGATIVO" & difftime(fecha_lab, fis, units = "days") >= 7 ~ "negativo",
+      test_pcr == "DENGUE" & difftime(fecha_lab, fis, units = "days") <= 7 ~ "positivo",
+      test_ns1 == "POSITIVO" & difftime(fecha_lab, fis, units = "days") <= 7 ~ "positivo",
+      test_igm == "POSITIVO" & difftime(fecha_lab, fis, units = "days") > 5 ~ "positivo",
+      test_pcr == "NEGATIVO" ~ "negativo",
+      test_ns1 == "NEGATIVO " ~ "negativo",
       TRUE ~ NA_character_
     )
   )
 
 # Selección final y campos derivados
-den_py_nuevo <- den_py_nuevo %>% filter (Notificacion_Alto_Parana == "si", clasificacion_para == "DENGUE") %>%
+den_py_nuevo <- den_py_nuevo %>% filter (Notificacion_Alto_Parana != "no", clasificacion_para == "DENGUE") %>%
   select(
     centro = Notificado_modificado,
     Sistema,
@@ -1001,12 +1082,7 @@ den_py_nuevo <- den_py_nuevo %>% filter (Notificacion_Alto_Parana == "si", clasi
     criterio,
     test_validado,
     resul_validado,
-    ano
-  ) %>%
-  mutate(
-    se = if_else(is.na(fis), if_else(is.na(fecha_lab), epiweek(fecha), epiweek(fecha_lab)), epiweek(fis)),
-    mes = if_else(is.na(fis), if_else(is.na(fecha_lab), month(fecha), month(fecha_lab)), month(fis)),
-    year_e = if_else(se >= 40, as.character(ano), as.character(as.numeric(ano) - 1))
+    ano, tipo_base
   ) %>%
   mutate(across(
     c(centro, Sistema,  noti_distrito, sexo, distrito, gravedad,
@@ -1027,31 +1103,45 @@ den_py_final <- den_py_final %>%
     fecha_lab = case_when(fecha_lab <= as.Date("1920-12-21") ~ NA_Date_,
                           fecha_lab >= as.Date("2024-12-21") ~ NA_Date_,
                           TRUE ~ fecha_lab),
-    sexo = case_when(sexo == "sd" ~ NA_character_,
-                     sexo == "femenino" ~ "Femenino",
-                     sexo == "masculino" ~ "Masculino",
+    sexo = case_when(sexo == "SD" ~ NA_character_,
+                     sexo == "INDETERMINADO" ~ NA_character_,
+                     sexo == "FEMENINO" ~ "femenino",
+                     sexo == "MASCULINO" ~ "masculino",
                      TRUE ~ sexo),
-    classi_fin = case_when(classi_fin == "descartado" ~ "Descartado", TRUE ~ classi_fin),
-    criterio = case_when(criterio == "laboratorio" ~ "Laboratorio",
-                         criterio == "epidemiologico" ~ "Nexo",
+    classi_fin = case_when(classi_fin == "descartado" ~ "descartado", TRUE ~ classi_fin),
+    criterio = case_when(criterio == "laboratorio" ~ "laboratorio",
+                         criterio == "epidemiologico" ~ "nexo",
                          TRUE ~ criterio),
     edad = if_else(edad == 999, NA_real_, edad),
     fecha_carga=as.Date(fecha)
   ) %>%
-  mutate(sistema = "dgvs", pais = "paraguay") %>%
+  mutate(sistema = "dgvs", pais = "paraguay")%>%
+  mutate(
+    se = ifelse(is.na(fis),
+                ifelse(is.na(fecha_lab), epiweek(fecha), epiweek(fecha_lab)),
+                epiweek(fis)),
+    mes = ifelse(is.na(fis),
+                 ifelse(is.na(fecha_lab), month(fecha), month(fecha_lab)),
+                 month(fis)),
+    year = ifelse(is.na(fis),
+                  ifelse(is.na(fecha_lab), year(fecha), year(fecha_lab)),
+                  year(fis)),
+    year_e = ifelse(se == 1 & mes == 12,
+                    year ,
+                    ifelse(se < 40, year - 1, year))) %>%
   select(
     fecha, fecha_carga, fis, fecha_lab, re, classi_fin, sexo, criterio,
     distrito, se, mes, year, year_e,
     sistema, pais, serotipo, 
     centro, noti_distrito, gravedad, test_pcr, test_ns1, test_igm,
-    test_validado, resul_validado
+    test_validado, resul_validado , tipo_base
   ) %>%
-  rename(test = test_validado, resultado = resul_validado)
+  rename(test = test_validado, resultado = resul_validado) 
 
 write.csv2(den_py_final, "source/csv/armo/dengue_py_total.csv")
 
 # Unión total de todas las bases
 dengue_total <- bind_rows(den_py_final, den_br_total, den_ar_total) %>%
-  filter(year_e > 2008, year_e < 2023)
+  filter(year_e > 2008, year_e < 2023) %>% select(-c(centro, noti_distrito, gravedad, test_pcr, test_ns1, test_igm))
 
 write.csv2(dengue_total, "source/csv/armo/dengue_total.csv")
