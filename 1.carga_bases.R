@@ -68,7 +68,7 @@ BR_Den_14_23 <- merge(BR_Den_14_20,data2023,all=T)
 write.csv2(BR_Den_09_13 ,"source/csv/Dengue_Foz_09_13_Crudo.csv")
 write.csv2(BR_Den_14_23 ,"source/csv/Dengue_Foz_14_23_Crudo.csv")
 
- g
+
 # Paraguay ----
 # Cargar base
 #Leo base de datos recibidas hasta 2020. Las bases est?n en Excel.
@@ -101,3 +101,19 @@ Den_py_nuevo<-read_xlsx("source/Paraguay/ALTO PARANA - 2021 a 2023 - ARBOVIROSIS
 
 write.csv2(Den_py_total ,"source/csv/dengue_py_crudo_09_20.csv")
 write.csv2(Den_py_nuevo ,"source/csv/dengue_py_crudo_21_23.csv")
+
+
+#Argentina----
+#cargo bases
+
+AR_Agrupados_2<-read.csv2("C:/Users/pc/Google Drive/INMET/Vigifronteiras/DATOS/Argentina/Dengue/TAD/TAD original/SNVS1_Agrupado_V2.csv", fileEncoding = "latin1")
+
+AR_SNVS_2<-read.csv2("C:/Users/pc/Google Drive/INMET/Vigifronteiras/DATOS/Argentina/Dengue/TAD/Alejandro/SNVS2_RAMIREZ.csv", fileEncoding = "latin1") %>%
+  filter(ID_LOC_INDEC_CARGA %in% c("54063000","54063030","54063090")|
+           ID_LOC_INDEC_RESIDENCIA %in% c("54063000", "54063030", "54063090")) %>%
+  filter(EVENTO== "Dengue")
+
+AR_SNVS_1<-read.csv2("C:/Users/pc/Google Drive/INMET/Vigifronteiras/DATOS/Argentina/Dengue/TAD/Alejandro/sivilasnvs1.csv", fileEncoding = "latin1")  %>%
+  filter(id_localidad =="3283" | id_localidad_carga=="3283" )
+
+####Corregir esto que se rompió
