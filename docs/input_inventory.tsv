@@ -1,0 +1,91 @@
+script	input_path
+scripts/01_data/01_import.R	source/SINAN/DENGBR09.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR10.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR11.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR12.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR13.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR14.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR15.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR16.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR17.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR18.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR19.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR20.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR21.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR22.dbc
+scripts/01_data/01_import.R	source/SINAN/DENGBR23.dbc
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2009.xlsx
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2010.xlsx
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2011.xlsx
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2012.xlsx
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2013.xlsx
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2014.xlsx
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2015.xlsx
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2016.xlsx
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2017.xlsx
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2018.xlsx
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2019.xlsx
+scripts/01_data/01_import.R	source/Paraguay/BASE ARBOVIROSIS 2020.xlsx
+scripts/01_data/01_import.R	source/Paraguay/ALTO PARANA - 2021 a 2023 - ARBOVIROSIS.xlsx
+scripts/01_data/01_import.R	source/TAD/SNVS1_Agrupado_V2.csv
+scripts/01_data/01_import.R	source/TAD/SNVS2_RAMIREZ.csv
+scripts/01_data/01_import.R	source/TAD/sivilasnvs1.csv
+scripts/01_data/02_harmonize.R	source/csv/Dengue_Foz_09_13_Crudo.csv
+scripts/01_data/02_harmonize.R	source/csv/Dengue_Foz_14_23_Crudo.csv
+scripts/01_data/02_harmonize.R	source/csv/Dengue_Ar_SNVS1_Crudo.csv
+scripts/01_data/02_harmonize.R	source/csv/Dengue_Ar_C2_Crudo.csv
+scripts/01_data/02_harmonize.R	source/TAD/SNVS1_Agrupado_V2.csv
+scripts/01_data/02_harmonize.R	source/csv/Dengue_Ar_SNVS2_Crudo.csv
+scripts/01_data/02_harmonize.R	source/csv/dengue_py_crudo_09_20.csv
+scripts/01_data/02_harmonize.R	source/csv/dengue_py_crudo_21_23.csv
+scripts/01_data/02_harmonize.R	source/Paraguay/Hospitales_py_final_Compaginado_final.csv
+scripts/01_data/03_validate.R	source/csv/armo/dengue_ar_agrupados.csv
+scripts/01_data/03_validate.R	source/csv/armo/dengue_ar_total.csv
+scripts/01_data/03_validate.R	source/csv/armo/dengue_py_total.csv
+scripts/01_data/03_validate.R	source/csv/armo/dengue_br_total.csv
+scripts/01_data/03_validate.R	source/csv/armo/dengue_total.csv
+scripts/02_transmission/01_build_weekly_rt.R	R/external/EstRtGT_v4.R
+scripts/02_transmission/01_build_weekly_rt.R	R/external/sumgamma_v2.R
+scripts/02_transmission/01_build_weekly_rt.R	source/csv/armo/dengue_ar_agrupados.csv
+scripts/02_transmission/01_build_weekly_rt.R	source/csv/armo/dengue_ar_total.csv
+scripts/02_transmission/01_build_weekly_rt.R	source/csv/armo/dengue_py_total.csv
+scripts/02_transmission/01_build_weekly_rt.R	source/csv/armo/dengue_br_total.csv
+scripts/02_transmission/01_build_weekly_rt.R	source/csv/armo/dengue_total.csv
+scripts/02_transmission/01_build_weekly_rt.R	source/csv/clima/clima_ar_se.csv
+scripts/02_transmission/01_build_weekly_rt.R	source/csv/pop/pop_ar.csv
+scripts/02_transmission/01_build_weekly_rt.R	source/csv/pop/pop_br.csv
+scripts/02_transmission/01_build_weekly_rt.R	source/csv/pop/pop_py.csv
+scripts/02_transmission/01_build_weekly_rt.R	scripts/02_transmission/rt/01_argentina.R
+scripts/02_transmission/01_build_weekly_rt.R	scripts/02_transmission/rt/01_argentina.R
+scripts/02_transmission/01_build_weekly_rt.R	scripts/02_transmission/rt/02_alto_parana.R
+scripts/02_transmission/01_build_weekly_rt.R	scripts/02_transmission/rt/03_ciudad_del_este.R
+scripts/02_transmission/01_build_weekly_rt.R	scripts/02_transmission/rt/04_minga_guazu.R
+scripts/02_transmission/01_build_weekly_rt.R	scripts/02_transmission/rt/05_presidente_franco.R
+scripts/02_transmission/01_build_weekly_rt.R	scripts/02_transmission/rt/06_hernandarias.R
+scripts/02_transmission/01_build_weekly_rt.R	salida/articulo_4/sombras_rt.csv
+scripts/02_transmission/02_epidemic_features.R	source/csv/tabataba/Base_SE_Final_CP.csv
+scripts/02_transmission/03_feature_tables.R	scripts/02_transmission/02_epidemic_features.R
+scripts/03_surveillance/01_quality.R	source/csv/armo/dengue_total.csv
+scripts/03_surveillance/01_quality.R	source/csv/armo/dengue_ar_agrupados.csv
+scripts/03_surveillance/02_quality_figures.R	scripts/03_surveillance/01_quality.R
+scripts/03_surveillance/03_quality_tables.R	scripts/03_surveillance/01_quality.R
+scripts/04_time_series/01_monthly.R	source/csv/armo/dengue_ar_agrupados.csv
+scripts/04_time_series/01_monthly.R	source/csv/armo/dengue_ar_total.csv
+scripts/04_time_series/01_monthly.R	source/csv/armo/dengue_py_total.csv
+scripts/04_time_series/01_monthly.R	source/csv/armo/dengue_br_total.csv
+scripts/04_time_series/01_monthly.R	source/csv/armo/dengue_total.csv
+scripts/04_time_series/02_weekly.R	source/csv/armo/dengue_ar_agrupados.csv
+scripts/04_time_series/02_weekly.R	source/csv/armo/dengue_ar_total.csv
+scripts/04_time_series/02_weekly.R	source/csv/armo/dengue_py_total.csv
+scripts/04_time_series/02_weekly.R	source/csv/armo/dengue_br_total.csv
+scripts/04_time_series/02_weekly.R	source/csv/armo/dengue_total.csv
+scripts/04_time_series/03_integrated_figures.R	source/csv/dengue_se_art_4.csv
+scripts/04_time_series/03_integrated_figures.R	source/csv/tabataba/Base_Rt_municipios_semanal_CP.csv
+scripts/04_time_series/03_integrated_figures.R	salida/articulo_4/Indicadores/Epi_features_Arg.csv
+scripts/04_time_series/03_integrated_figures.R	salida/articulo_4/Indicadores/Epi_features_BR.csv
+scripts/04_time_series/03_integrated_figures.R	salida/articulo_4/Indicadores/Epi_features_PY_MG.csv
+scripts/04_time_series/03_integrated_figures.R	salida/articulo_4/Indicadores/Epi_features_PY_HER.csv
+scripts/04_time_series/03_integrated_figures.R	salida/articulo_4/Indicadores/Epi_features_PY_PF.csv
+scripts/04_time_series/03_integrated_figures.R	salida/articulo_4/Indicadores/Epi_features_PY_CDE.csv
+scripts/04_time_series/03_integrated_figures.R	salida/articulo_4/sombras_rt.csv
+scripts/04_time_series/03_integrated_figures.R	source/csv/armo/dengue_total.csv

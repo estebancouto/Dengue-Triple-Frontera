@@ -1,0 +1,5 @@
+manuscript_item	source_script	expected_output	input_version	verification
+harmonization (number pending)	scripts/01_data/03_validate.R	salida/articulo_1/	not supplied	pending
+surveillance quality (number pending)	scripts/03_surveillance/03_quality_tables.R	salida/articulo_2/	not supplied	pending
+Rt and epidemic features (number pending)	scripts/02_transmission/01_build_weekly_rt.R	salida/articulo_4/	not supplied	pending
+integrated figures (number pending)	scripts/04_time_series/03_integrated_figures.R	salida/articulo_4/Figuras/	not supplied	pending

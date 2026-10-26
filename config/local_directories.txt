@@ -1,0 +1,17 @@
+R/external
+salida/articulo_1
+salida/articulo_1/tablas
+salida/articulo_2
+salida/articulo_4
+salida/articulo_4/Figuras
+salida/articulo_4/Indicadores
+salida/articulo_4/Rt
+salida/articulo_4/series_temporales
+source/Paraguay
+source/SINAN
+source/TAD
+source/csv
+source/csv/armo
+source/csv/clima
+source/csv/pop
+source/csv/tabataba
